@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>🚰 Sepolia Faucet Miner</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #111;
+      color: #eee;
+      padding: 2rem;
+    }
+    pre {
+      background: #222;
+      padding: 1rem;
+      border-radius: 8px;
+      max-height: 400px;
+      overflow-y: scroll;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 Sepolia Faucet Miner (Status)</h1>
+  <p>Mining for your wallet. Keep this page open to monitor logs. No CAPTCHA required as long as link is valid.</p>
+  <pre id="log">Loading...</pre>
+  <script>
+    async function fetchLog() {
+      try {
+        const res = await fetch('/status');
+        const text = await res.text();
+        document.getElementById('log').textContent = text;
+      } catch (err) {
+        document.getElementById('log').textContent = '⚠️ Error loading log';
+      }
+    }
+    fetchLog();
+    setInterval(fetchLog, 10000);
+  </script>
+</body>
+</html>
